@@ -74,29 +74,20 @@ exports.obtenerEdificiosPorFiltros = async (req, res) => {
 
     const edificios = await Edificio.aggregate(ejecucion);
 
-    const edificioConUrls = edificios.map((edificio) => {
-      const baseUrl = `${req.protocol}://${req.get("host")}`;
+    const baseUrl = `${req.protocol}://${req.get("host")}`;
 
-        if (edificio.imagen_edificio) {
-          edificio.imagen_edificio = `${baseUrl}/${edificio.imagen_edificio.replace(
-          /\\/g,
-          "/"
-        )}`;
+    const edificioConUrls = edificios.map((edificio) => {
+      
+      // Construir URL para la imagen del edificio
+      if (edificio.imagen_edificio) {
+        edificio.imagen_edificio = `${baseUrl}/${edificio.imagen_edificio.replace(/\\/g, "/")}`;
       }
-      if (edificio.lugares && Array.isArray(edificio.lugares)) {
-        edificio.lugares = edificio.lugares.map((lugar) => {
-          if (lugar.imagen_lugar) {
-            return {
-              ...lugar,
-              imagen_lugar: `${baseUrl}/${lugar.imagen_lugar.replace(
-                /\\/g,
-                "/"
-              )}`,
-            };
-          }
-          return lugar;
-        });
+
+      // Construir URL para la imagen del lugar (ahora está en "lugar" no en "lugares")
+      if (edificio.lugar && edificio.lugar.imagen_lugar) {
+        edificio.lugar.imagen_lugar = `${baseUrl}/${edificio.lugar.imagen_lugar.replace(/\\/g, "/")}`;
       }
+
       return edificio;
     });
 

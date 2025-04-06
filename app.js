@@ -11,7 +11,7 @@ app.use(express.json());
 app.use('/uploads', express.static('uploads'));
 
 // Rutas
-app.use('/instituto', edificioRoute);
+app.use('/ITSE', edificioRoute);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Servidor corriendo en puerto ${PORT}`));

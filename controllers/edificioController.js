@@ -77,13 +77,13 @@ exports.obtenerEdificiosPorFiltros = async (req, res) => {
     const baseUrl = `${req.protocol}://${req.get("host")}`;
 
     const edificioConUrls = edificios.map((edificio) => {
-      
+
       // Construir URL para la imagen del edificio
       if (edificio.imagen_edificio) {
         edificio.imagen_edificio = `${baseUrl}/${edificio.imagen_edificio.replace(/\\/g, "/")}`;
       }
 
-      // Construir URL para la imagen del lugar (ahora está en "lugar" no en "lugares")
+      // Construir URL para la imagen del lugar
       if (edificio.lugar && edificio.lugar.imagen_lugar) {
         edificio.lugar.imagen_lugar = `${baseUrl}/${edificio.lugar.imagen_lugar.replace(/\\/g, "/")}`;
       }

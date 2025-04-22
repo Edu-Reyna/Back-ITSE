@@ -13,7 +13,7 @@ app.use('/uploads', express.static('uploads'));
 
 // Configuración de CORS (¡Antes de las rutas!)
 app.use(cors({
-  origin: 'http://13.218.175.60/:4200', // URL de tu frontend Angular
+  origin: 'http://13.218.175.60:4200', // URL de tu frontend Angular
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type']
 }));
